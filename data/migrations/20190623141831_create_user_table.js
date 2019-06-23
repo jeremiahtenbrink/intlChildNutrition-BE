@@ -3,8 +3,7 @@ exports.up = function(knex, Promise) {
     tbl.increments();
     tbl
       .string("username", 128)
-      .notNullable()
-      .unique();
+      .notNullable();
 
     tbl
       .string("password", 128)
@@ -20,6 +19,8 @@ exports.up = function(knex, Promise) {
       .inTable('country')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
+
+    tbl.unique("username")
   });
 };
 
