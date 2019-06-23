@@ -1,0 +1,23 @@
+{
+  "name": "child-nutrition",
+  "version": "1.0.0",
+  "description": "API for child nutrition tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intlChildNutrition/intlChildNutrition-BE.git"
+  },
+  "keywords": [
+    "Child",
+    "Nutrion"
+  ],
+  "author": "Manju KC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/intlChildNutrition/intlChildNutrition-BE/issues"
+  },
+  "homepage": "https://github.com/intlChildNutrition/intlChildNutrition-BE#readme"
+}
