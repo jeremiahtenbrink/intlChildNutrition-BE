@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Users = require("./usermodel.js");
+const bcrypt = require("bcryptjs");
 
 router.post("/register", (req, res) => {
   let user = req.body;
@@ -15,6 +16,8 @@ router.post("/register", (req, res) => {
       res.status(200).json({ error: "User already exist" });
     }
   });
+  const hash = bcrypt.hashSync(user.password, 10);
+  user.password = hash;
 
   Users.add(user)
     .then(saved => {

@@ -3,9 +3,11 @@ exports.up = function(knex, Promise) {
       tbl.increments();
   
       tbl
-        .string('name', 255)
-        .notNullable()
-        .unique();
+        .string('country', 255)
+        .notNullable();
+
+      tbl
+        .unique('country');
     });
   };
   
