@@ -5,7 +5,6 @@ const db = require("../data/dbconfig.js");
 
 router.get("/countrylist", (req, res) => {
   db("country")
-    .where({filter})
     .then(country => {
       res.status(200).json(country);
     })
