@@ -14,7 +14,7 @@ router.post( "/register", async( req, res ) => {
     
     if( !user.username || !user.password ){
         res.status( 404 ).json( {
-            error: "You need to send username, password and isAdmin/country_id"
+            error: "You need to send username, password"
         } );
     }
     
