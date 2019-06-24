@@ -23,7 +23,12 @@ router.post("/register", (req, res) => {
 
   Users.add(user)
     .then(saved => {
-      res.status(201).json(saved);
+      console.log(saved)
+      res.status(201).json({
+        id: saved.id,
+        isAdmin: saved.isAdmin,
+        username: saved.username
+      });
     })
     .catch(error => {
       console.error(error);
@@ -47,7 +52,7 @@ router.post("/login", (req, res) => {
           token
         });
       } else {
-        res.status(401).json({ message: "I Shall not pass" });
+        res.status(401).json({ message: "Your username/password is incorrect" });
       }
     })
     .catch(error => {
