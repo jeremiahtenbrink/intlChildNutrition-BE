@@ -18,9 +18,9 @@ router.post( "/register", async( req, res ) => {
         } );
     }
     
-    let foundUser = await Users.findBy( { username: user.username } ).first();
+    let foundUser = await Users.findBy( { username: user.username } );
     
-    if( foundUser ){
+    if( foundUser[ 0 ] ){
         res.status( 200 ).json( { error: "User already exist" } );
     }
     
@@ -31,7 +31,9 @@ router.post( "/register", async( req, res ) => {
         .then( saved => {
             console.log( saved );
             res.status( 201 ).json( {
-                id: saved.id, isAdmin: saved.isAdmin, username: saved.username
+                id: saved.id,
+                isAdmin: saved.isAdmin,
+                username: saved.username,
             } );
         } )
         .catch( error => {
