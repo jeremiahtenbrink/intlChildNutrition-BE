@@ -2,14 +2,20 @@ const router = require("express").Router();
 const Users = require("./usermodel.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const secrets = require("../helpers/secrets.js")
+const secrets = require("../helpers/secrets.js");
+
+
+function errorHandler(err, res) {
+  res.status(500).json({ msg: `error retrieving the data`, err });
+}
 
 router.post("/register", (req, res) => {
+  console.log('i am here')
   let user = req.body;
 
   if (!user.username || !user.password || !user.country_id) {
     res.status(404).json({
-      error: "You need to send username, password and isAdmin/CountryId"
+      error: "You need to send username, password and isAdmin/country_id"
     });
   }
 
@@ -31,6 +37,7 @@ router.post("/register", (req, res) => {
       });
     })
     .catch(error => {
+      console.log('i am here ', error)
       console.error(error);
       res.status(500).json(error);
     });
@@ -71,6 +78,17 @@ router.get('/logout', (req, res) => {
     });
   }
 });
+
+// router.get("/:id", authenticate,(req, res) => {
+//   console.log("i am here");
+//   try {
+//     const { id } = req.params;
+//     const user =  Users.getById(id);
+//     return res.status(200).json(user);
+//   } catch (err) {
+//     return errorHandler(err, res);
+//   }
+// });
 
 function generateToken(user) {
   const payload = {
