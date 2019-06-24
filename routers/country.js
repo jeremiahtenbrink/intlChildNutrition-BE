@@ -1,9 +1,27 @@
 const router = require("express").Router();
 
+
 const db = require("../data/dbconfig.js");
 
-router.get("/country", (req, res) => {
+router.get("/countrylist", (req, res) => {
   db("country")
+    .where({filter})
+    .then(country => {
+      res.status(200).json(country);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
+router.get("/country", (req, res) => {
+  const isAdmin = req.session.user.isAdmin;
+  const filter = {};
+  if (!isAdmin) {
+    filter.id = req.session.user.country_id;
+  }
+  db("country")
+    .where({filter})
     .then(country => {
       res.status(200).json(country);
     })
@@ -16,7 +34,6 @@ router.post("/country", (req, res) => {
   if (!req.body.country) {
     res.status(400).json({ msg: "Please provide a country" });
   } else {
-    console.log(`I am here 1`, req.body);
 
     db("country")
       .insert(req.body)
